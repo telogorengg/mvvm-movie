@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View"/>
+
+        <variable
+            name="position"
+            type="java.lang.Integer" />
+
+        <variable
+            name="vm_tvshow"
+            type="com.ujangwahyu.mvvm_pattern.viewmodel.tvshow.TvShowViewModel" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.fragment.tvshow.TvShowFragment">
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:onRefreshListener="@{() -> vm_tvshow.onRefresh()}"
+            app:refreshing="@{vm_tvshow.isRefresh}">
+
+            <com.ujangwahyu.mvvm_pattern.custom.EmptyRecyclerView
+                android:id="@+id/rv_item"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:setAdapter="@{vm_tvshow.getAdapter()}"
+                tools:listitem="@layout/item_tv_show"/>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    </RelativeLayout>
+
+</layout>
